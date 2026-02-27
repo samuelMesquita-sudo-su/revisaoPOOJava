@@ -28,7 +28,8 @@ public class Main {
             System.out.println("---SISTEMA HELPDESK---");
             System.out.println("1 - Cadastrar Cliente");
             System.out.println("2 - Abrir Chamada");
-            System.out.println("3 - Sair");
+            System.out.println("3 - Alterar Status");
+            System.out.println("4 - Sair");
             opcao = scanner.nextInt();
             scanner.nextLine();
 
@@ -44,10 +45,12 @@ public class Main {
                 case 2:
                     System.out.println("Digite o numero o número do chamado");
                     Integer numero = scanner.nextInt();
+                    scanner.nextLine();
 
                     System.out.println("Digite o titulo");
                     String titulo = scanner.nextLine();
-                    scanner.nextLine();
+
+
                     System.out.println("Digite a descrição");
                     String descricao = scanner.nextLine();
 
@@ -69,28 +72,31 @@ public class Main {
                     break;
 
                 case 3: {
-                    System.out.println("Digite o número do chamado:");
-                    Integer numChamado = scanner.nextInt();
-                    scanner.nextLine();
+                    int op;
+                    Integer numChamado;
+                    StatusChamado novoStatus;
+                    do {
+                        System.out.println("Digite o número do chamado:");
+                        numChamado = scanner.nextInt();
+                        scanner.nextLine();
 
-                    System.out.println("1 - ABERTO\t2- EM ANDAMENTO\t3 - RESOLVIDO\t4 - CANCELADO");
-                    int op = scanner.nextInt();
-                    scanner.nextLine();
+                        System.out.println("1 - ABERTO\t2- EM ANDAMENTO\t3 - RESOLVIDO\t4 - CANCELADO");
+                        op = scanner.nextInt();
+                        scanner.nextLine();
 
-                    StatusChamado novoStatus = null;
+                        novoStatus = null;
 
-                    if (op == 1) novoStatus = StatusChamado.ABERTO;
-                    if (op == 2) novoStatus = StatusChamado.EM_ANDAMENTO;
-                    if (op == 3) novoStatus = StatusChamado.RESOLVIDO;
-                    if (op == 4) novoStatus = StatusChamado.CANCELADO;
-
+                        if (op == 1) novoStatus = StatusChamado.ABERTO;
+                        if (op == 2) novoStatus = StatusChamado.EM_ANDAMENTO;
+                        if (op == 3) novoStatus = StatusChamado.RESOLVIDO;
+                        if (op == 4) novoStatus = StatusChamado.CANCELADO;
+                    } while(op <=0 || op >=5);
                     hd.alterarStatus(numChamado, novoStatus);
                     break;
-                    //ajustar dps, colocar do while
                 }
             }
 
-        }while (opcao != 3);
+        }while (opcao != 4);
     }
 
 }
